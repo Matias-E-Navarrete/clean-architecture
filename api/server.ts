@@ -1,12 +1,27 @@
-import Express from '../infrastructure/server/express/express';
-import { IoC } from './ioc/container';
+import IServer from "../infrastructure/interfaces/IServer.interface";
 
-export class Server {
+export class Server implements IServer {
 
-    server;
+    private static instance: Server;
 
-    constructor(){
-        this.server = new Express().app;
+    private constructor(private readonly express) {
+        Server.instance = express;
     }
 
-} 
+    //#region Singleton pattern.  
+    static getInstance(): Server {
+        if (!Server.instance) {
+            Server.instance = this.constructor()
+        }
+        return Server.instance
+    }
+    //#endregion
+
+    run(port: number) {
+        this.express.listen(port)
+    }
+
+    stop(done: unknown) {
+        this.express.close(done)
+    }
+}
