@@ -42,7 +42,7 @@ export class IoC {
         await DatabaseConnectionManager.connect();
         const repositories = DatabaseConnectionManager.getRepositories()
 
-        return repositories;
+        return  repositories;
     }
 
     private static addClassDependency(key: string, value: any) {

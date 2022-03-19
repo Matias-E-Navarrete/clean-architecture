@@ -12,9 +12,11 @@ export default class ExpressAdapter {
     }
 
     setup(middlewares: unknown[], router: Router) {
+        
         for (const middleware of middlewares) {
             this.app.use(middlewares);
         }
+
         this.app.use('/v1', router);
         // this.app.use(apiErrorHandler);
     }

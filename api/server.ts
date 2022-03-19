@@ -4,7 +4,7 @@ export class Server implements IServer {
 
     private static instance: Server;
 
-    private constructor(private readonly express) {
+    private constructor(private readonly express, applicationService) {
         Server.instance = express;
     }
 

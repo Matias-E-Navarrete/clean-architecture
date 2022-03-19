@@ -12,7 +12,7 @@ const application = async (applicationService: ApplicationService) => {
     const server = Server.getInstance()
 
     server.run(PORT)
-
+    // how to resolve all services??
     container.resolve('applicationService') as ApplicationService
 
     const response = applicationService.execute()

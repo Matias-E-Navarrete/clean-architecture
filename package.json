@@ -20,7 +20,7 @@
   },
   "scripts": {
     "build": "tsc --dist",
-    "dev": "nodemon api/app.ts",
+    "dev": "nodemon index.ts",
     "test": "npm run jest"
   },
   "repository": {
