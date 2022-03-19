@@ -1,11 +1,19 @@
 import { asClass, asFunction, asValue, AwilixContainer, createContainer, InjectionMode } from 'awilix';
 
+// #region Application imports
+import ApplicationService from '../../modules';
+// #endregion
+
+
 // #region Infrastructure Imports
-import Express from '../../infrastructure/server/express/express';
+// import Express from '../../infrastructure/persistence/mysql/databaseConnectionManager'
 import { DatabaseConnectionManager } from '../../infrastructure/persistence/mysql/databaseConnectionManager';
+
+import Express from '../../infrastructure/server/express/express';
 // #endregion
 
 export class IoC {
+
 
     private static container: AwilixContainer
 
@@ -19,31 +27,37 @@ export class IoC {
         this.container = createContainer({ injectionMode: InjectionMode.CLASSIC })
         // #endregion
 
-        // this.addClassDependency('getUserService', GetUserService)
+        //#region Application dependency
+        this.addClassDependency("applicationService", ApplicationService)
+        //#endregion
+
+        // #region Server dependencies
+        this.addClassDependency('express', Express)
+        // #endregion
 
         return this.container;
     }
 
-    static async resolvePersistenceSystem(): Promise<{ [key: string]: any }>{
+    static async resolvePersistenceSystem(): Promise<{ [key: string]: any }> {
         await DatabaseConnectionManager.connect();
         const repositories = DatabaseConnectionManager.getRepositories()
 
-        return repositories;
+        return  repositories;
     }
 
-    private static addClassDependency(key: string, value: any){
+    private static addClassDependency(key: string, value: any) {
         this.container.register({
             [key]: asClass(value).scoped().singleton()
         })
     }
-    
-    private static addCValueDependency(key: string, value: any){
+
+    private static addCValueDependency(key: string, value: any) {
         this.container.register({
             [key]: asValue(value)
         })
     }
 
-    private static addFunctionDependency(key: string, value: any){
+    private static addFunctionDependency(key: string, value: any) {
         this.container.register({
             [key]: asFunction(value)
         })

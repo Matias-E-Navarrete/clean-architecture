@@ -1,22 +1,24 @@
-import express from 'express'
+import express, { Router } from 'express'
 import IServer from '../../interfaces/IServer.interface'
 
-export default class Express implements IServer {
+
+export default class ExpressAdapter {
+
     app;
-    
-    constructor() {
-        this.app = express()
-    }
-    listen(port) {
-        this.app.listen(port, ()=>{
-            console.log(`Server running on`);
-        })
-    }
-    run() {
-        throw new Error('Method not implemented.');
-    }
-    use() {
-        this.app.use();
+
+    constructor(private readonly middlewares: unknown[], private readonly router: Router) {
+        this.app = express();
+        this.setup(middlewares, router)
     }
 
+    setup(middlewares: unknown[], router: Router) {
+        
+        for (const middleware of middlewares) {
+            this.app.use(middlewares);
+        }
+
+        this.app.use('/v1', router);
+        // this.app.use(apiErrorHandler);
+    }
+    
 }

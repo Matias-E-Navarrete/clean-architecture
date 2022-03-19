@@ -1,7 +1,4 @@
-
 export default interface IServer {
-    app();
-    listen(port: number);
-    run();
-    use(middleware: any);
+    run(port: number): any
+    stop(done: unknown): any
 }

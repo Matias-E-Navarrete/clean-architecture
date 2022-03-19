@@ -1,7 +1,6 @@
-import { getUserById, getUserBySpecification, getUsers } from './example/User/getUser/user.controller';
+import { getUserById, getUsers } from './User/getUser/';
 
 export {
     getUserById,
-    getUserBySpecification,
     getUsers
 }
