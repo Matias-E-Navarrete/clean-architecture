@@ -1,28 +1,17 @@
 
-export class GetUsers {
 
-    constructor(
-        private readonly getUsersRules: getUsersRule,
-        // private readonly preconditionsValidatorService: IPreconditionValidator,
+export class GetUsersService {
+    // constructor(private readonly userRepository: IUserRepository) { }
 
-    ) { }
+    // public async find(id: number): Promise<User | null> {
+    //     return await this.userRepository.find(id);
+    // }
 
-    execute(getUserRequestDto) {
-        
+    // public async all(): Promise<User[]> {
+    //     return await this.userRepository.all();
+    // }
 
-        console.log("Hello World")
-
-        // Validate preconditions
-    
-        // call to mapper to create filterDto
-        
-        // call to database to find data
-
-        // call to mapper to create response
-
-
-        return;
-
-    }
+    // public async store(entry: UserCreateDto): Promise<void> {
+    //     const balance = await this.userRepository.findByUserId(entry.user_id);
+    // }
 }
-
